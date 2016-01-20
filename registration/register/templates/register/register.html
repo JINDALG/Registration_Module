@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Register</title>
+</head>
+<body>
+	<form method="post">
+		{{error_emailS}}
+		{% csrf_token %}
+		<div class="input-container">
+          <input id="name" name="name" type="text" >
+          <label for="name"> Name</label>
+          <div class="bar"></div>
+        </div>
+        <div class="input-container">
+          <input id="email" name="email" type="email" >
+          <label for="email">Email</label>
+          <div class="bar"></div>
+        </div>
+        <div class="input-container">
+          <input id="course" name="course" type="text" >
+          <label for="course">Course</label>
+          <div class="bar"></div>
+        </div>
+        <div class="input-container">
+          <input id="contact" name="contact" type="text" >
+          <label for="contact">contact</label>
+          <div class="bar"></div>
+        </div>
+        <div class="input-container">
+          <input id="college" name="college" type="text" >
+          <label for="college">College</label>
+          <div class="bar"></div>
+        </div>
+        <div class="input-container">
+          <input id="year" name="year" type="integer" >
+          <label for="year">Year</label>
+          <div class="bar"></div>
+        </div>
+		<input type="submit">
+	</form>
+</body>
+</html>

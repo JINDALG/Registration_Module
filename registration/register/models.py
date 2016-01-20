@@ -3,8 +3,10 @@ import datetime
 # Create your models here.
 
 class Student(models.Model):
-	name = models.CharField()
-	contact = models.CharField()
-	email = models.CharField()
-	college = models.CharField()
+	name = models.CharField(max_length = 20)
+	email = models.EmailField()
+	course = models.CharField(max_length = 20)
+	contact = models.CharField(max_length = 20)
+	college = models.CharField(max_length = 20)
+	year = models.IntegerField()
 	
