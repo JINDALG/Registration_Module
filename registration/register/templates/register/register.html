@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Register</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 </head>
 <body>
 	<form method="post">
@@ -21,8 +22,13 @@
         </div>
         <div class="input-container">
         	<div> {{error_course}} </div>
-          <input id="course" name="course" type="text" value="{{course}}">
-          <label for="course">Course</label>
+         <select name="course">
+    			<option value="B.Tech">B.Tech</option>
+    			<option value="M.Tech">M.Tech</option>
+    			<option value="MBA">MBA</option>
+    			<option value="MCA">MCA</option>
+  		</select>
+  		<label for="course">Course</label>
           <div class="bar"></div>
         </div>
         <div class="input-container">
@@ -32,12 +38,12 @@
           <div class="bar"></div>
         </div>
         <div class="input-container">
-        	<div> {{error_college}} </div>
+        <div>{{error_college}}</div>
           <select name="college">
     			<option value="jssaten">JSSATEN</option>
     			<option value="others">OTHERS</option>
-  		</select>
-  		<label for="college">College</label>
+  		  </select>
+  		  <label for="college">College</label>
           <div class="bar"></div>
         </div>
         <div class="input-container">
@@ -53,5 +59,15 @@
         </div>
 		<input type="submit">
 	</form>
+	<script type="text/javascript">
+		$('select[name="college"]').change(function(){
+   			if($('select[name="college"] option:selected').text() == "OTHERS"){
+    	    	$('html select[name="college"]').closest('.input-container').after('<div class="input-container other"><input id="college" name="othercollege" type="text" value="{{college}}"><label for="college">Enter your college name here</label><div class="bar"></div></div>');
+   			}
+   			else{
+   				$('div.other').remove()
+   			}
+		});	
+	</script>
 </body>
 </html>

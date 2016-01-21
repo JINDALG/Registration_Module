@@ -19,7 +19,7 @@ def valid_email(email):
     return not email or EMAIL_RE.match(email)
 
 def valid_college(college):
-	if college == 'jssaten' or college == 'others':
+	if college != '':
 		return True
 	return False
 
@@ -50,15 +50,13 @@ def register(request):
 			if not valid_email(email):
 				params['error_email'] = 'Enter a valid email id'
 				have_error = True
-			if not valid_college(college):
-				params['error_college'] = 'Enetr a valid college name'
-				have_error = True
-			if year >4 or year < 1 :
-				params['error_year'] = 'Enter current college year'
-				have_error == True
-			if not (course == 'B.tech' or course=='M.tech' or course=='MCA' or course=='MBA'):
-				params['error_course'] = 'Enter your college course'
-				have_error = True
+
+			if college == 'others':
+				college = form.cleaned_data['othercollege']
+				if not valid_college(college):
+					params['error_college'] = "college name can't be empty"
+					params['college'] = college
+					have_error = True
 
 			if have_error:
 				return render(request , 'register/register.html' , params)
