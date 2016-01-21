@@ -5,5 +5,5 @@ class Register(forms.Form):
 	email   = forms.EmailField(label='email')
 	course  = forms.CharField(label='course' ,max_length = 20)
 	contact = forms.CharField(label='contact', max_length = 10)
-	college = forms.CharField(label='college' , max_length = 20)
-	year    = forms.IntegerField(label='year')
+	college = forms.ChoiceField(choices =(('jssaten','jssaten'),('others','others')))
+	year    = forms.ChoiceField(choices =((1,1),(2,'2')))

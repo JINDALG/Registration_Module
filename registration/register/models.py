@@ -9,4 +9,7 @@ class Student(models.Model):
 	contact = models.CharField(max_length = 20)
 	college = models.CharField(max_length = 20)
 	year = models.IntegerField()
+
+	def __unicode__(self):
+		return self.name
 	

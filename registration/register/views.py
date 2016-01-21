@@ -19,7 +19,7 @@ def valid_email(email):
     return not email or EMAIL_RE.match(email)
 
 def valid_college(college):
-	if college == 'JSSATEN' or college == 'others':
+	if college == 'jssaten' or college == 'others':
 		return True
 	return False
 
@@ -35,7 +35,12 @@ def register(request):
 			college = form.cleaned_data['college']
 			year = form.cleaned_data['year']
 			have_error = False
-			params = dict(name = name,email = email,contact = contact , form = Register())
+			params = dict(name = name,email = email,contact = contact , form = form, course = course, college = college, year = year)
+			student = Student.objects.filter(email = email)
+			if student:
+				params['error_email'] = 'Student already registered.'
+				have_error = True
+				return render(request , 'register/register.html' , params)
 			if not valid_name(name):
 				params['error_name'] = 'Enter a valid name'
 				have_error = True
@@ -55,10 +60,6 @@ def register(request):
 				params['error_course'] = 'Enter your college course'
 				have_error = True
 
-			student = Student.objects.filter(email = email)
-			if student:
-				params['error_email'] = 'Student already registered.'
-				have_error = True
 			if have_error:
 				return render(request , 'register/register.html' , params)
 			else :
@@ -70,7 +71,6 @@ def register(request):
 			errors = form.errors
 			errors = errors.values()
 			error = errors[0]
-			form = Register()
 			return render(request,'register/register.html',{'form':form , 'error':error})
 
 	else :
