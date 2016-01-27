@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Zealicon</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+</head>
+<body>
+
+		<form method="post">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<input type="submit">
+		</form>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('input[name="other_college"]').parent().hide()
+			$('select[name="college"]').change(function() {
+				if($('select[name="college"] option:selected').text() == "OTHERS") {
+					$('input[name="other_college"]').parent().show()
+				}
+				else {
+					$('input[name="other_college"]').parent().hide()
+				}
+			})
+			$('select[name="course"]').change(function() {
+				if($('select[name="course"] option:selected').text() == "B.Tech") {
+					$('select[name="branch"]').parent().show()
+				}
+				else {
+					$('select[name="branch"]').parent().hide()
+				}
+			})
+		})
+	</script>
+</body>
+</html>

@@ -1,10 +1,14 @@
 from django import forms
+from .models import Student
 
-class Register(forms.Form):
-	name = forms.CharField(label='name' , max_length = 20);
-	email   = forms.EmailField(label='email')
-	course  = forms.ChoiceField(choices =(('B.Tech','B.Tech'),('MBA','MBA'),('MCA','MCA'),('M.Tech','M.Tech')))
-	contact = forms.CharField(label='contact')
-	college = forms.ChoiceField(choices =(('jssaten','jssaten'),('others','others')))
-	othercollege = forms.CharField(required=False)
-	year    = forms.ChoiceField(choices =((1,'1'),(2,'2'),(3,'3'),(4,'4')))
+
+class Register_form(forms.ModelForm):
+	college_choice = (
+		('jss', 'JSS Academy of Technical Education, Noida'),
+		('others', 'OTHERS')
+		)
+	college = forms.ChoiceField(choices = college_choice, initial = 'jss')
+	other_college = forms.CharField(required = False)
+	class Meta:
+		model = Student
+		fields = ['name','email','course','branch','contact','college','other_college','year']
